@@ -1,0 +1,70 @@
+{% extends 'base.html' %} {% block title %}Services Page{% endblock title %}
+{%block body %}
+
+<div class="container my-4">
+  <h1 class="my-4 text-center">Results :</h1>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    {% for item in products %}
+    <form method="POST" action="\services\products\individualdetails">
+      {% csrf_token %}
+      <div class="col">
+        <div class="card shadow-sm">
+          <input name="name" style="display: none" value="{{item.name}}" />
+          <input name="price" style="display: none" value="{{item.price}}" />
+          <input
+            name="description"
+            style="display: none"
+            value="{{item.description}}"
+          />
+          <input
+            name="image"
+            style="display: none"
+            value="{{item.image.url}}"
+          />
+
+          <img src="{{item.image.url}}" />
+          <div class="card-body">
+            <p class="card-text">{{item.name}}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="submit" class="btn btn-sm btn-outline-secondary">
+                  View Details
+                </button>
+              </div>
+              <small class="text-muted">S.S.H.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    {% endfor %}
+  </div>
+</div>
+<div class="d-flex justify-content-center">
+  <form class="mx-3" action="/services/products/{{prevCounter}}/" method="POST">
+    {% csrf_token %}
+    <input value="{{searchKey}}" style="display: none" name="key" />
+    <button type="submit" class="btn btn-sm btn-primary">Prev</button>
+  </form>
+  <form action="/services/products/{{nextCounter}}/" method="POST">
+    {% csrf_token %}
+    <input value="{{searchKey}}" style="display: none" name="key" />
+    <button type="submit" class="btn btn-sm btn-primary">Next</button>
+  </form>
+</div>
+
+{% endblock body %} {% block search %}
+
+<form class="d-flex mb-0" method="POST" action="/services/products/0/">
+  {% csrf_token %}
+  <input
+    class="form-control me-2"
+    type="search"
+    placeholder="Search"
+    aria-label="Search"
+    name="key"
+  />
+  <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+
+{% endblock search %}

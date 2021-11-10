@@ -1,0 +1,57 @@
+{% extends 'base.html' %} {% block title %} Contact Us{% endblock title %}
+{%block body %}
+
+<div class="container-fluid mb-3 px-0">
+  <img
+    src="{{baseUrl}}{{name}}.jpg"
+    class="d-block w-100"
+  />
+</div>
+<div class="container py-5 ">
+  <h3 class="text-center">Contact Us</h3>
+
+  <form method="POST" action="/contact" class="row g-3">
+    {% csrf_token %}
+    <div class="col-md-12">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" placeholder="John Smith" class="form-control" name="name" />
+    </div>
+
+    <div class="col-12">
+      <label for="email"  class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+       name="email"
+        placeholder="johnsmith@gmail.com"
+      />
+    </div>
+    <div class="col-12">
+      <label for="phone" class="form-label">Phone Number</label>
+      <input type="Number" placeholder="+9779*********" class="form-control" name="phone" />
+    </div>
+    <div class="col-md-12">
+      <label for="desc" class="form-labesl">Tell me why do you want to contact me</label>
+      <textarea type="text" class="form-control" placeholder="Your Message..." name="desc" /></textarea>
+    </div>
+    
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+</div>
+
+{% endblock body %}
+{% block search %}
+<div class="contact">+977-1-4424248</div>
+{% endblock search %}
+{% block style%}
+<style>
+
+  .contact {
+    color: white;
+    margin-right: 1.1rem;
+  }
+</style>
+
+{% endblock style %} 

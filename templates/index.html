@@ -1,0 +1,219 @@
+{% extends 'base.html' %} {% block body %}
+<div class="container-fluid px-0">
+  <div
+    id="carouselExampleIndicators"
+    class="carousel slide container-fluid px-0"
+    data-bs-ride="carousel"
+  >
+    <div class="carousel-indicators">
+    {% for image in images  %}
+
+    <button
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide-to="{{forloop.counter0}}"
+        {% if forloop.first %}
+        class="active"
+        aria-current="true"
+        {% endif %}
+        aria-label="Slide {{forloop.counter}}"
+      ></button>
+    {% endfor %}
+      {% comment %} <button
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide-to="0"
+        class="active"
+        aria-current="true"
+        aria-label="Slide 1"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide-to="1"
+        aria-label="Slide 2"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide-to="2"
+        aria-label="Slide 3"
+      ></button> {% endcomment %}
+    </div>
+    <div class="carousel-inner">
+    {% for image  in images%}
+    <div class="carousel-item {% if forloop.first %} active{% endif %}">
+        <img src="media/{{image.image }}" class="d-block w-100" alt="..." />
+      </div>
+    {% endfor %}
+      {% comment %} <div class="carousel-item active">
+        <img src="/static/images/1img.jpg" class="d-block w-100" alt="..." />
+      </div>
+      <div class="carousel-item">
+        <img src="/static/images/2img.jpg" class="d-block w-100" alt="..." />
+      </div>
+      <div class="carousel-item">
+        <img src="/static/images/3img.jpg" class="d-block w-100" alt="..." />
+      </div>  {% endcomment %}
+    </div>
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  </div>
+  </div>
+
+
+<div class="dataStack">
+{% for item in data %}
+
+{% if item.title %}
+<h1 class="text-center my-3">
+{{item.title}}
+</h1>
+{% endif %}
+{% if item.image %}<div class="image_of_detail"><img src="{{item.image.url}}" /></div>{% endif %}
+  
+<blockquote class="blockquote text-center">
+  <p class="mb-0">{{item.paragraph}}</p>
+  </blockquote>
+
+
+{% endfor %}
+</div>
+<h3 class="my-4 text-center">Recent Popular Items</h3>
+<div class="favourite row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    {% for item in items %}
+    <form method="POST" action="\services\products\individualdetails">
+      {% csrf_token %}
+      <div class="col">
+        <div class="card shadow-sm">
+          <input name="name" style="display: none" value="{{item.name}}" />
+          <input name="price" style="display: none" value="{{item.price}}" />
+          <input
+            name="description"
+            style="display: none"
+            value="{{item.description}}"
+          />
+          <input
+            name="image"
+            style="display: none"
+            value="{{item.image.url}}"
+          />
+
+          <img src="{{item.image.url}}" />
+          <div class="card-body">
+            <p class="card-text">{{item.name}}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="submit" class="btn btn-sm btn-outline-secondary">
+                  View Details
+                </button>
+              </div>
+              <small class="text-muted">S.S.H.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    {% endfor %}
+  </div>
+
+
+{% endblock body %} {% block title %} Shree Swastik Handicraft{% endblock title%}
+
+{% block style %}
+<style>
+.favourite{
+  max-width:70%;
+  display:flex;
+  flex-direction:row;
+  margin:auto;
+
+}
+.image_of_detail {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .image_of_detail > img {
+    max-width: 100%;
+  }
+  .contact{
+    color:white;
+    margin-right:1.1rem;
+  }
+</style>
+{% endblock style %}
+{% block search %}
+<div class="contact">+977-1-4424248</div>
+{% endblock search %}
+{% comment %} 
+<div class="container my-4 ">
+      <h1 class="my-4 text-center"> Select Form The range of Ice creams</h1>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="https://source.unsplash.com/600x600/?nature,water">
+
+            <div class="card-body">
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="https://source.unsplash.com/600x600/?girl">
+            <div class="card-body">
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+           <img src="https://source.unsplash.com/600x600/?icecream">
+            <div class="card-body">
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+
+ {% endcomment %}

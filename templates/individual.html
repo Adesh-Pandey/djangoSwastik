@@ -1,0 +1,97 @@
+{% extends 'base.html' %} {% block title %} {{name}} -detail {% endblock title%}
+{% block body %}
+
+<div class="individual">
+  <div class="image">
+    <img src="{{image}}" />
+  </div>
+  <div class="desc">
+    <div class="detail">
+      <h1 class="name">{{name}}</h1>
+      <div class="price"><b>Price : </b>{{price}}</div>
+
+      <div class="description">{{description}}</div>
+    </div>
+  </div>
+</div>
+{%endblock body%} {% block style %}
+
+<style>
+  .individual {
+    margin-left: 0.6rem;
+    display: flex;
+    margin-top: 2.4rem;
+    margin-right: 0.3rem;
+  }
+  .image > img {
+    max-height: 300px;
+  }
+  .name {
+    text-align: center;
+  }
+  .price > b {
+    font-size: 1.2rem;
+  }
+  .desc {
+    margin-left: 0.7rem;
+  }
+
+  @media only screen and (max-width: 550px) {
+    .image {
+      margin: auto;
+    }
+    .image>img{
+        max-width:200px;
+    }
+    .individual {
+      flex-direction: column;
+    }
+
+    .name {
+      margin: 1rem;
+    }
+  }
+  @media only screen and (min-width: 800px) {
+    .image > img {
+      max-height: 500px;
+      margin: 0 2rem;
+    }
+    .image{
+        padding-left:15px;
+    }
+    .description {
+      margin-top:2rem;
+      font-size: 1.2em;
+    }
+    .detail {
+      max-width: 700px;
+    }
+    .desc {
+      margin: 0 auto;
+    }
+
+    @media only screen and (min-width: 1500px) {
+    .image > img {
+      max-height: 500px;
+      margin: 0 2rem;
+    }
+    .image{
+        padding-left:15px;
+    }
+    .description {
+      font-size: 1.2em;
+    }
+    .detail {
+      max-width: 700px;
+    }
+    .desc {
+      margin: 0 auto;
+    }
+
+    .individual{
+        max-width:1500px;
+    }
+  }
+</style>
+
+{% endblock style %}

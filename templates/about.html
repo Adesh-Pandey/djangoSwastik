@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% block body %}
+<div class="dataStack">
+  {% for item in data %} {% if item.title %}
+  <h1 class="text-center my-3">{{item.title}}</h1>
+  {% endif %} {% if item.image%}
+  <div class="image_of_detail"><img src="{{item.image.url}}" /></div>
+  {% endif %}
+  <blockquote class="blockquote text-center">
+    <p class="mb-0">{{item.paragraph}}</p>
+  </blockquote>
+
+  {% endfor %}
+</div>
+{% endblock body %}{% block title %}About us{% endblock title%} {% block style%}
+<style>
+  .image_of_detail {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .image_of_detail > img {
+    max-width: 100%;
+  }
+  .contact {
+    color: white;
+    margin-right: 1.1rem;
+  }
+</style>
+
+{% endblock style %} {% block search %}
+<div class="contact">+977-1-4424248</div>
+{% endblock search %}
